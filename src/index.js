@@ -3,12 +3,16 @@ const app = express();
 require("dotenv").config({ path: "src/.env" });
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
+const taskRoutes = require("./routes/taskRoutes");
+const cors = require("cors");
 
+app.use(cors());
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 app.use(express.json());
 app.use("/api/auth", authRoutes);
+app.use("/api/tasks", taskRoutes);
 
 mongoose
   .connect(MONGODB_URI)
